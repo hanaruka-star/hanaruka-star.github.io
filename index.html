@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KAZUMA — Documentary Portrait</title>
+<meta name="description" content="Kazuma — Documentary portrait photography. Chân dung tài liệu, góc nhìn điện ảnh. Fuji X100T.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg-soft: #111111;
+    --text: #f2f0ea;
+    --text-dim: #9a978f;
+    --accent: #c9a86a;
+    --line: #222222;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  /* HERO */
+  .hero {
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 60px 24px;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 30%, rgba(201,168,106,0.07), transparent 60%);
+    pointer-events: none;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 12vw, 7rem);
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    text-indent: 0.35em;
+    margin-bottom: 8px;
+  }
+  .hero .tagline {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: var(--accent);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .hero .sub {
+    max-width: 560px;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    margin-bottom: 40px;
+  }
+  .hero .scroll-hint {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    position: absolute;
+    bottom: 30px;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 32px;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.9), transparent);
+    transition: background 0.3s;
+  }
+  nav .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.3em;
+    color: var(--text);
+    text-decoration: none;
+  }
+  nav .links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-left: 28px;
+    transition: color 0.2s;
+  }
+  nav .links a:hover { color: var(--accent); }
+
+  /* SECTION */
+  section { padding: 90px 0; }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .section-desc {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    max-width: 600px;
+    margin: 0 auto 50px;
+  }
+
+  /* GALLERY */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+  }
+  .gallery figure {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-soft);
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease, opacity 0.3s;
+    aspect-ratio: 4/3;
+  }
+  .gallery figure:hover img { transform: scale(1.03); }
+  .gallery figcaption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 40px 16px 14px;
+    background: linear-gradient(to top, rgba(10,10,10,0.85), transparent);
+    color: var(--text);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .gallery figure:hover figcaption { opacity: 1; }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .about-grid img {
+    width: 100%;
+    border-radius: 4px;
+    filter: grayscale(20%);
+  }
+  .about-text h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 16px;
+  }
+  .about-text p { color: var(--text-dim); margin-bottom: 16px; font-size: 0.95rem; }
+  .about-text .accent { color: var(--accent); }
+
+  /* CONTACT */
+  .contact {
+    text-align: center;
+    background: var(--bg-soft);
+    border-top: 1px solid var(--line);
+  }
+  .contact .big {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 400;
+    margin-bottom: 12px;
+  }
+  .contact p { color: var(--text-dim); margin-bottom: 32px; font-size: 0.95rem; }
+  .contact-links a {
+    display: inline-block;
+    margin: 0 12px 12px;
+    padding: 12px 28px;
+    border: 1px solid var(--line);
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: all 0.3s;
+  }
+  .contact-links a:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* LIGHTBOX */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.95);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    cursor: zoom-out;
+  }
+  .lightbox img {
+    max-width: 92vw;
+    max-height: 88vh;
+    object-fit: contain;
+  }
+  .lightbox .close {
+    position: absolute;
+    top: 20px; right: 28px;
+    color: var(--text);
+    font-size: 2rem;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+  }
+
+  footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+  }
+
+  @media (max-width: 768px) {
+    nav .links a { margin-left: 16px; font-size: 0.7rem; }
+    .about-grid { grid-template-columns: 1fr; }
+    .gallery { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+    section { padding: 60px 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">KAZUMA</a>
+  <div class="links">
+    <a href="#gallery">Gallery</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <h1>KAZUMA</h1>
+  <div class="tagline">Documentary Portrait</div>
+  <p class="sub">
+    Chân dung tài liệu — góc nhìn điện ảnh.<br>
+    Không tạo dáng. Không sân khấu. Chỉ là con người, trong không gian của họ.
+  </p>
+  <div class="scroll-hint">— SCROLL —</div>
+</header>
+
+<section id="gallery">
+  <div class="container">
+    <h2 class="section-title">Album 01 — Nơi cơ thể nói</h2>
+    <p class="section-desc">Buổi chụp đầu tiên. Một võ sĩ, một phòng gym, ánh sáng cuối ngày. Những khoảnh khắc giữa các hiệp tập — khi cơ thể thành thật nhất.</p>
+    <div class="gallery">
+      <figure><img src="assets/web/DSCF4411.jpg" alt="Chân dung võ sĩ trong phòng gym" loading="lazy"><figcaption>Giữa hiệp — ánh sáng viền</figcaption></figure>
+      <figure><img src="assets/web/DSCF4449.jpg" alt="Kazuma album 01" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4485.jpg" alt="Kazuma album 01" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4503.jpg" alt="Kazuma album 01" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4513.jpg" alt="Kazuma album 01" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4534.jpg" alt="Kazuma album 01" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4541.jpg" alt="Kazuma album 01" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4544.jpg" alt="Kazuma album 01" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4568.jpg" alt="Kazuma album 01" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4570.jpg" alt="Kazuma album 01" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4575.jpg" alt="Kazuma album 01" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4592.jpg" alt="Kazuma album 01" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4598.jpg" alt="Kazuma album 01" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4601.jpg" alt="Kazuma album 01" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4603.jpg" alt="Kazuma album 01" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4624.jpg" alt="Kazuma album 01" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <h2 class="section-title">Về tôi</h2>
+    <div class="about-grid">
+      <img src="assets/web/DSCF4411.jpg" alt="Kazuma — nhiếp ảnh gia">
+      <div class="about-text">
+        <h3>kazuma — một chiếc máy ảnh nhỏ, một con mắt</h3>
+        <p>Tôi chụp chân dung tài liệu bằng chiếc <span class="accent">Fuji X100T</span> đời 2014 — một ống kính cố định 35mm, không zoom, không flash to.</p>
+        <p>Tôi tin con người đẹp nhất khi họ <span class="accent">đang sống</span> — không phải khi đang tạo dáng. Mỗi khung hình là một câu chuyện: họ là ai, đang ở đâu, đang làm gì.</p>
+        <p>Không sân khấu. Không gượng ép. Chỉ là những khoảnh khắc thật, trong không gian thật của họ.</p>
+        <p class="accent">— Nếu bạn muốn được chụp theo cách này, hãy nói chuyện với tôi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="container">
+    <div class="big">Hãy kể tôi nghe câu chuyện của bạn</div>
+    <p>Tôi đang tìm những con người thật — trong không gian thật của họ.<br>Bạn pha cà phê, bạn vẽ, bạn tập luyện, bạn chỉ đơn giản là có một góc nhà đẹp với ánh sáng cửa sổ.</p>
+    <div class="contact-links">
+      <a href="#">Threads</a>
+      <a href="#">Instagram</a>
+      <a href="#">Zalo</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  KAZUMA — DOCUMENTARY PORTRAIT · FUJI X100T · © 2026
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <span class="close" onclick="closeLightbox()">✕</span>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+  // Lightbox
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  document.querySelectorAll('.gallery img').forEach(img => {
+    img.parentElement.addEventListener('click', () => {
+      lightboxImg.src = img.src.replace('/web/', '/web/');
+      lightbox.style.display = 'flex';
+    });
+  });
+  function closeLightbox() { lightbox.style.display = 'none'; }
+  lightbox.addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+  // Nav background on scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 60) {
+      nav.style.background = 'rgba(10,10,10,0.95)';
+    } else {
+      nav.style.background = 'linear-gradient(to bottom, rgba(10,10,10,0.9), transparent)';
+    }
+  });
+</script>
+</body>
+</html>
