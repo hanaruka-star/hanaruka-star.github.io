@@ -159,6 +159,31 @@
   }
   .gallery figure:hover figcaption { opacity: 1; }
 
+  /* ALBUM COLLAPSE — thu gọn mỗi album, mở rộng khi cần */
+  .gallery.collapsed figure:nth-child(n+4) { display: none; }
+  @media (max-width: 560px) {
+    .gallery.collapsed figure:nth-child(n+2) { display: none; }
+  }
+  .album-toggle {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 28px;
+    border: 1px solid rgba(200,160,80,0.5);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--accent);
+    font-family: inherit;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+  }
+  .album-toggle:hover {
+    background: var(--accent);
+    color: #0a0a0a;
+  }
+
   /* ABOUT */
   .about-grid {
     display: grid;
@@ -278,7 +303,7 @@
   <div class="container">
     <h2 class="section-title">Album 01 — Nơi cơ thể nói</h2>
     <p class="section-desc">Buổi chụp đầu tiên. Một baller/gymer một phòng gym, ánh sáng ngày mưa. Những khoảnh khắc một buổi tập thường ngày — khi cơ thể thành thật nhất.</p>
-    <div class="gallery">
+    <div class="gallery collapsed">
       <figure><img src="assets/web/DSCF4411.jpg" alt="Chân dung võ sĩ trong phòng gym" loading="lazy"><figcaption> ÁNH SÁNG VIỀN</figcaption></figure>
       <figure><img src="assets/web/DSCF4449.jpg" alt="Kazuma album 01" loading="lazy"><figcaption>MỒ HÔI ĐỔ</figcaption></figure>
       <figure><img src="assets/web/DSCF4485.jpg" alt="Kazuma album 01" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
@@ -296,6 +321,7 @@
       <figure><img src="assets/web/DSCF4603.jpg" alt="Kazuma album 01" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
       <figure><img src="assets/web/DSCF4624.jpg" alt="Kazuma album 01" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
     </div>
+    <button class="album-toggle" data-label="Xem toàn bộ album">Xem toàn bộ album</button>
   </div>
 </section>
 
@@ -303,7 +329,7 @@
   <div class="container">
     <h2 class="section-title">Album 02 — Hyrox</h2>
     <p class="section-desc">Một buổi tập của vận động viên Hyrox — HYROX là mô phỏng những chuyển động cơ bản và tự nhiên của con người.</p>
-    <div class="gallery">
+    <div class="gallery collapsed">
       <figure><img src="assets/web/DSCF4749.jpg" alt="Hyrox buổi tập 01" loading="lazy"><figcaption>1</figcaption></figure>
       <figure><img src="assets/web/DSCF4771.jpg" alt="Hyrox buổi tập 04" loading="lazy"><figcaption>2</figcaption></figure>
       <figure><img src="assets/web/DSCF4824.jpg" alt="Hyrox buổi tập 06" loading="lazy"><figcaption>3</figcaption></figure>
@@ -316,6 +342,7 @@
       <figure><img src="assets/web/DSCF4959.jpg" alt="Hyrox buổi tập 15" loading="lazy"><figcaption>10</figcaption></figure>
       <figure><img src="assets/web/DSCF4985.jpg" alt="Hyrox buổi tập 16" loading="lazy"><figcaption>11</figcaption></figure>
     </div>
+    <button class="album-toggle" data-label="Xem toàn bộ album">Xem toàn bộ album</button>
   </div>
 </section>
 
@@ -369,6 +396,17 @@
   function closeLightbox() { lightbox.style.display = 'none'; }
   lightbox.addEventListener('click', closeLightbox);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+  // Album collapse toggle — mở rộng / thu gọn
+  document.querySelectorAll('.album-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const gallery = btn.closest('.container').querySelector('.gallery');
+      gallery.classList.toggle('collapsed');
+      const isCollapsed = gallery.classList.contains('collapsed');
+      const count = gallery.querySelectorAll('figure').length;
+      btn.textContent = isCollapsed ? 'Xem toàn bộ album (' + count + ' ảnh)' : 'Thu gọn ↑';
+    });
+  });
 
   // Nav background on scroll
   window.addEventListener('scroll', () => {
