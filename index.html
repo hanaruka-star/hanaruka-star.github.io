@@ -125,24 +125,25 @@
 
   /* GALLERY */
   .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 16px;
+    columns: 3;
+    column-gap: 16px;
   }
+  @media (max-width: 900px) { .gallery { columns: 2; } }
+  @media (max-width: 560px) { .gallery { columns: 1; } }
   .gallery figure {
     position: relative;
     overflow: hidden;
     background: var(--bg-soft);
     border-radius: 4px;
     cursor: pointer;
+    break-inside: avoid;
+    margin-bottom: 16px;
   }
   .gallery img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
     display: block;
     transition: transform 0.5s ease, opacity 0.3s;
-    aspect-ratio: 4/3;
   }
   .gallery figure:hover img { transform: scale(1.03); }
   .gallery figcaption {
@@ -257,6 +258,7 @@
   <a href="#" class="logo">KAZUMA</a>
   <div class="links">
     <a href="#gallery">Gallery</a>
+    <a href="#album02">Hyrox</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </div>
@@ -293,6 +295,31 @@
       <figure><img src="assets/web/DSCF4601.jpg" alt="Kazuma album 01" loading="lazy"><figcaption>RUN </figcaption></figure>
       <figure><img src="assets/web/DSCF4603.jpg" alt="Kazuma album 01" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
       <figure><img src="assets/web/DSCF4624.jpg" alt="Kazuma album 01" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="album02">
+  <div class="container">
+    <h2 class="section-title">Album 02 — Hyrox</h2>
+    <p class="section-desc">Một buổi tập của vận động viên Hyrox — sức mạnh, hơi thở, và những khoảnh khắc giữa các hiệp.</p>
+    <div class="gallery">
+      <figure><img src="assets/web/DSCF4749.jpg" alt="Hyrox buổi tập 01" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4751.jpg" alt="Hyrox buổi tập 02" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4760.jpg" alt="Hyrox buổi tập 03" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4771.jpg" alt="Hyrox buổi tập 04" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4779.jpg" alt="Hyrox buổi tập 05" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4824.jpg" alt="Hyrox buổi tập 06" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4867.jpg" alt="Hyrox buổi tập 07" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4889.jpg" alt="Hyrox buổi tập 08" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4893.jpg" alt="Hyrox buổi tập 09" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4902.jpg" alt="Hyrox buổi tập 10" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4910.jpg" alt="Hyrox buổi tập 11" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4911.jpg" alt="Hyrox buổi tập 12" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4920.jpg" alt="Hyrox buổi tập 13" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4938.jpg" alt="Hyrox buổi tập 14" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4959.jpg" alt="Hyrox buổi tập 15" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
+      <figure><img src="assets/web/DSCF4985.jpg" alt="Hyrox buổi tập 16" loading="lazy"><figcaption>Khoảnh khắc</figcaption></figure>
     </div>
   </div>
 </section>
